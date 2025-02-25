@@ -2,13 +2,17 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
+    <title>我的第一個網頁簡歷</title>
+    <link rel="stylesheet" href="test.css">
+    <meta charset="UTF-8">
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 <body>
     <div id="app">
         <h1>{{ message }}</h1>
         <link rel="stylesheet" href="test.css">
-        <button @click="changeMessage">點我改變訊息</button>
+        <button @click="changeMessage">切換英文</button>
+        <button @click="changeChinese">切換中文</button>
     </div>
 
     <script>
@@ -17,12 +21,16 @@
         createApp({
             data() {
                 return {
-                    message: "個人簡歷"
+                    message: "張宸瑋"
                 };
             },
             methods: {
                 changeMessage() {
-                    this.message = "訊息已改變！";
+                    this.message = "Chris";
+                },
+            
+                changeChinese() {
+                    this.message = "張宸瑋";
                 }
             }
         }).mount("#app");
