@@ -1,25 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-TW">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>我的第一個網頁簡歷</title>
     <link rel="stylesheet" href="test.css" />
+    <meta charset="UTF-8" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   </head>
   <body>
-    <h1>Box Model</h1>
-
-    <div class="borderdiv">
-      <p>The block is bordered with green line (2px)</p>
-      <ol>
-        <li>True mastery of any skill takes a lifetime.</li>
-        <li>Sweat is the lubricant of success.</li>
-        <li>Energy and persistence conquer all things.</li>
-        <li>Bravery never goes out of fashion.</li>
-        <li>
-          If you are doing your best,you will not have to worry about failure.
-        </li>
-      </ol>
+    <div id="app">
+      <h1>{{ message }}</h1>
+      <button @click="toggleMessage">切換語言</button>
     </div>
+
+    <script>
+      const { createApp } = Vue;
+
+      createApp({
+        data() {
+          return {
+            message: "張宸瑋",
+            isChinese: true,
+          };
+        },
+        methods: {
+          toggleMessage() {
+            this.isChinese = !this.isChinese;
+            this.message = this.isChinese ? "張宸瑋" : "Chris";
+          },
+        },
+      }).mount("#app");
+    </script>
+    <img src="123.gif" />
+    <img src="image.png" />
   </body>
 </html>
