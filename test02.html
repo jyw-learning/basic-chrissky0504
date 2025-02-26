@@ -1,31 +1,20 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>內嵌樣式範例</title>
+    <style>
+        h1 {
+            color: green;
+            text-align: center;
+        }
+        p {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+    </style>
 </head>
 <body>
-    <div id="app">
-        <h1>{{ message }}</h1>
-        <link rel="stylesheet" href="test.css">
-        <button @click="changeMessage">點我改變訊息</button>
-    </div>
-
-    <script>
-        const { createApp } = Vue;
-
-        createApp({
-            data() {
-                return {
-                    message: "Hello Vue!"
-                };
-            },
-            methods: {
-                changeMessage() {
-                    this.message = "訊息已改變！";
-                }
-            }
-        }).mount("#app");
-    </script>
+    <h1>這是一個標題</h1>
+    <p>這是一段文字，使用了內嵌樣式。</p>
 </body>
 </html>
