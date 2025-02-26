@@ -10,9 +10,7 @@
 <body>
     <div id="app">
         <h1>{{ message }}</h1>
-        <link rel="stylesheet" href="test.css">
-        <button @click="changeMessage">切換英文</button>
-        <button @click="changeChinese">切換中文</button>
+        <button @click="toggleMessage">切換語言</button>
     </div>
 
     <script>
@@ -21,16 +19,14 @@
         createApp({
             data() {
                 return {
-                    message: "張宸瑋"
+                    message: "張宸瑋",
+                    isChinese: true
                 };
             },
             methods: {
-                changeMessage() {
-                    this.message = "Chris";
-                },
-            
-                changeChinese() {
-                    this.message = "張宸瑋";
+                toggleMessage() {
+                    this.isChinese = !this.isChinese;
+                    this.message = this.isChinese ? "張宸瑋" : "Chris";
                 }
             }
         }).mount("#app");
