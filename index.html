@@ -1,28 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>個人名片</title>
     <link rel="stylesheet" href="test.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <h1>個人簡歷</h1>
-
-    <div class="borderdiv" style="display: flex; align-items: center">
-      <img src="123.gif" alt="Profile Image" style="margin-right: 20px" />
-      <div>
-        <p>自我介紹</p>
-        <ol>
-          <li>姓名:張宸瑋</li>
-          <li>Sweat is the lubricant of success.</li>
-          <li>Energy and persistence conquer all things.</li>
-          <li>Bravery never goes out of fashion.</li>
-          <li>
-            If you are doing your best,you will not have to worry about failure.
+    <div class="background">
+      <canvas id="particleCanvas"></canvas>
+      <!-- 粒子背景 -->
+    </div>
+    <div class="card">
+      <img
+        id="profile-img"
+        src="123.gif"
+        alt="Profile Image"
+        class="profile-img"
+      />
+      <div class="info">
+        <h1>張宸瑋</h1>
+        <p class="subtitle">自我介紹</p>
+        <ul class="quotes">
+          <li class="fade-in">
+            一個即將要從中原畢業的大四學生，目前還在等放榜，但沒想到先來的是海軍陸戰隊的兵單，希望不要落榜，不然就要被拖去屏東了。
           </li>
-        </ol>
+        </ul>
       </div>
     </div>
+    <script src="script.js"></script>
+    <!-- 引入 JS -->
   </body>
 </html>
