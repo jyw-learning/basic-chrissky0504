@@ -32,6 +32,26 @@ class Particle {
   }
 }
 
+document
+  .getElementById("experience-btn")
+  .addEventListener("click", function () {
+    let experienceSection = document.getElementById("experience-section");
+    document.getElementById("profile-section").classList.add("hidden"); // 隱藏個人名片
+    experienceSection.classList.remove("hidden"); // 先顯示區塊
+    setTimeout(() => {
+      experienceSection.classList.add("active"); // 啟動淡入動畫
+    }, 10);
+  });
+
+document.getElementById("back-btn").addEventListener("click", function () {
+  let experienceSection = document.getElementById("experience-section");
+  experienceSection.classList.remove("active"); // 先讓它淡出
+  setTimeout(() => {
+    experienceSection.classList.add("hidden"); // 完全隱藏
+    document.getElementById("profile-section").classList.remove("hidden"); // 顯示個人名片
+  }, 500); // 確保動畫結束後再隱藏
+});
+
 function initParticles() {
   particles = [];
   for (let i = 0; i < 50; i++) {

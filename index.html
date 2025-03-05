@@ -15,23 +15,48 @@
       <canvas id="particleCanvas"></canvas>
       <!-- 粒子背景 -->
     </div>
-    <div class="card">
-      <img
-        id="profile-img"
-        src="123.gif"
-        alt="Profile Image"
-        class="profile-img"
-      />
-      <div class="info">
-        <h1>張宸瑋</h1>
-        <p class="subtitle">自我介紹</p>
-        <ul class="quotes">
-          <li class="fade-in">
-            一個即將要從中原畢業的大四學生，目前還在等放榜，但沒想到先來的是海軍陸戰隊的兵單，希望不要落榜，不然就要被拖去屏東了。
+
+    <div class="container">
+      <!-- 個人名片內容 -->
+      <div id="profile-section" class="card">
+        <img
+          id="profile-img"
+          src="123.gif"
+          alt="Profile Image"
+          class="profile-img"
+        />
+        <div class="info">
+          <h1>張宸瑋</h1>
+          <p class="subtitle">自我介紹</p>
+          <ul class="quotes">
+            <li class="fade-in">
+              一個即將要從中原畢業的大四學生，目前還在等放榜，但沒想到先來的是海軍陸戰隊的兵單，希望不要落榜，不然就要被拖去屏東了。
+            </li>
+          </ul>
+          <button id="experience-btn" class="btn">查看個人經歷</button>
+        </div>
+      </div>
+
+      <!-- 個人經歷內容（預設隱藏） -->
+      <div id="experience-section" class="card hidden fullscreen">
+        <h1>個人經歷</h1>
+        <p class="subtitle">這是我的工作與學習經歷：</p>
+        <ul class="experience-list">
+          <li>🏫 學歷：中原大學 電機工程學系學士</li>
+          <li>💼 專長：Python、linux系統語言、嵌入式系統應用</li>
+            <li>📖 專案：
+            <ul>
+              <li>金融商品分析-用大數據分析股票</li>
+              <li>智慧多功能移動垃圾桶</li>
+              <li>新世代觀光用翻譯機與會議機</li>
+            </ul>
+            </li>
           </li>
         </ul>
+        <button id="back-btn" class="btn">返回</button>
       </div>
     </div>
+
     <script src="script.js"></script>
     <!-- 引入 JS -->
   </body>

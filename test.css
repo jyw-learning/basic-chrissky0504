@@ -129,3 +129,54 @@ h1 {
     width: 90%;
   }
 }
+
+/* 讓個人經歷占滿整個畫面 */
+.fullscreen {
+  position: fixed; /* 固定在畫面上 */
+  top: 0;
+  left: 0;
+  width: 100vw; /* 覆蓋整個螢幕寬度 */
+  height: 100vh; /* 覆蓋整個螢幕高度 */
+  background: rgba(255, 255, 255, 0.95); /* 微透明背景，讓背景粒子可見 */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: left;
+  opacity: 0; /* 預設透明 */
+  transform: scale(0.9);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* 當顯示時，讓它淡入並放大 */
+.fullscreen.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* 隱藏時，直接 display: none; */
+.hidden {
+  display: none;
+}
+
+/* 修改按鈕樣式 */
+.btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 24px;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.btn:hover {
+  background-color: #357abd;
+}
+
+.btn:active {
+  transform: scale(0.95);
+}
