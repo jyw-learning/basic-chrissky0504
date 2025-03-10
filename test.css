@@ -180,3 +180,104 @@ h1 {
 .btn:active {
   transform: scale(0.95);
 }
+
+/* 修改：專案圖片容器改為可滾動的大尺寸顯示 */
+.project-image-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+
+.project-image-container.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.project-image-wrapper {
+  background: white;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  position: relative;
+  max-width: 95%;
+  max-height: 90vh;
+  overflow: auto; /* 啟用滾動條 */
+  transform: scale(0.9);
+  transition: transform 0.3s;
+}
+
+.project-image-container.visible .project-image-wrapper {
+  transform: scale(1);
+}
+
+.project-image-container img {
+  display: block;
+  max-width: none; /* 移除最大寬度限制 */
+  width: auto; /* 讓圖片顯示原始大小 */
+  height: auto; /* 讓圖片顯示原始大小 */
+  min-width: 800px; /* 最小寬度 */
+}
+
+/* 優化滾動條樣式 */
+.project-image-wrapper::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.project-image-wrapper::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 5px;
+}
+
+.project-image-wrapper::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+
+.project-image-wrapper::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* 調整關閉按鈕位置，確保在滾動時仍然可見 */
+.close-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #ff4757;
+  color: white;
+  border: 2px solid white;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  z-index: 1100;
+}
+
+/* 添加專案項目的可點擊樣式 */
+.experience-list ul li {
+  cursor: pointer;
+  padding: 8px;
+  margin: 5px 0;
+  border-radius: 4px;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.experience-list ul li:hover {
+  background-color: #f0f0f0;
+  transform: translateX(5px);
+}

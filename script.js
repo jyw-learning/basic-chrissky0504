@@ -89,5 +89,59 @@ document.getElementById("profile-img").addEventListener("click", function () {
   this.src = this.src.includes(img1) ? img2 : img1;
 });
 
+// 修正專案圖片顯示功能，增加放大滾動功能
+document.addEventListener("DOMContentLoaded", function () {
+  const projectImageContainer = document.getElementById(
+    "project-image-container"
+  );
+  const projectImage = document.getElementById("project-image");
+  const projectItems = document.querySelectorAll(".experience-list ul li");
+  const closeBtn = document.querySelector(".close-btn");
+
+  const projectImages = {
+    "金融商品分析-用大數據分析股票": "meta.png",
+    智慧多功能移動垃圾桶: "trashcan.png",
+    新世代觀光用翻譯機與會議機: "trans.png",
+  };
+
+  // 關閉按鈕點擊事件
+  closeBtn.addEventListener("click", function () {
+    projectImageContainer.classList.remove("visible");
+  });
+
+  // 點擊背景也可以關閉
+  projectImageContainer.addEventListener("click", function (e) {
+    if (e.target === projectImageContainer) {
+      projectImageContainer.classList.remove("visible");
+    }
+  });
+
+  // ESC鍵關閉圖片
+  document.addEventListener("keydown", function (e) {
+    if (
+      e.key === "Escape" &&
+      projectImageContainer.classList.contains("visible")
+    ) {
+      projectImageContainer.classList.remove("visible");
+    }
+  });
+
+  // 為每個專案項目添加點擊事件
+  projectItems.forEach((item) => {
+    item.addEventListener("click", function () {
+      const text = this.textContent.trim();
+
+      // 檢查是否有對應的圖片
+      if (projectImages[text]) {
+        // 確保圖片加載完成後再顯示
+        projectImage.onload = function () {
+          projectImageContainer.classList.add("visible");
+        };
+        projectImage.src = projectImages[text];
+      }
+    });
+  });
+});
+
 initParticles();
 animateParticles();
