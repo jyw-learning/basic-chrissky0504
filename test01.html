@@ -1,37 +1,45 @@
-<!DOCTYPE html>
-<html lang="zh-TW">
-  <head>
-    <meta charset="UTF-8" />
-    <title>我的第一個網頁簡歷</title>
-    <link rel="stylesheet" href="test.css" />
-    <meta charset="UTF-8" />
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-  </head>
-  <body>
-    <div id="app">
-      <h1>{{ message }}</h1>
-      <button @click="toggleMessage">切換語言</button>
-    </div>
+<div id="timer">10</div>
+<button id="startBtn">開始</button>
+<button id="stopBtn">停止</button>
 
-    <script>
-      const { createApp } = Vue;
+<script>
+  let countdown;
+  let seconds = 10;
 
-      createApp({
-        data() {
-          return {
-            message: "張宸瑋",
-            isChinese: true,
-          };
-        },
-        methods: {
-          toggleMessage() {
-            this.isChinese = !this.isChinese;
-            this.message = this.isChinese ? "張宸瑋" : "Chris";
-          },
-        },
-      }).mount("#app");
-    </script>
-    <img src="123.gif" />
-    <img src="image.png" />
-  </body>
-</html>
+  document.getElementById("startBtn").addEventListener("click", function () {
+    // 清除舊的計時器，避免重複計時
+    clearInterval(countdown);
+
+    // 重設秒數
+    seconds = 10;
+    document.getElementById("timer").innerText = seconds;
+
+    // 開始新計時器
+    countdown = setInterval(function () {
+      seconds--;
+      document.getElementById("timer").innerText = seconds;
+
+      if (seconds <= 0) {
+        clearInterval(countdown);
+        alert("時間到！");
+      }
+    }, 1000);
+  });
+
+  document.getElementById("stopBtn").addEventListener("click", function () {
+    clearInterval(countdown);
+  });
+  let colors = ["#FF5733", "#33FF57", "#3357FF", "#F3FF33"];
+  let currentIndex = 0;
+
+  function changeBackgroundColor() {
+    document.body.style.backgroundColor = colors[currentIndex];
+    currentIndex = (currentIndex + 1) % colors.length;
+  }
+
+  // 點擊按鈕後執行顏色切換
+  document.getElementById("colorBtn").addEventListener("click", function () {
+    // 每 1.5 秒切換一次顏色
+    setInterval(changeBackgroundColor, 1500);
+  });
+</script>
