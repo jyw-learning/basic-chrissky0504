@@ -7,7 +7,21 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  position: relative;
+}
+
+/* 添加全局樣式變數 */
+:root {
+  --primary-color: #667eea;
+  --secondary-color: #764ba2;
+  --accent-color: #f093fb;
+  --text-primary: #2c3e50;
+  --text-secondary: #7f8c8d;
+  --card-bg: rgba(255, 255, 255, 0.95);
+  --shadow-light: 0 8px 32px rgba(0, 0, 0, 0.1);
+  --shadow-medium: 0 12px 40px rgba(0, 0, 0, 0.15);
+  --shadow-heavy: 0 20px 60px rgba(0, 0, 0, 0.2);
 }
 
 /* 背景動畫區域 */
@@ -18,6 +32,25 @@ body {
   top: 0;
   left: 0;
   z-index: -1;
+  overflow: hidden;
+}
+
+.background::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+  animation: backgroundShift 10s ease-in-out infinite alternate;
+}
+
+@keyframes backgroundShift {
+  0% { transform: translateX(-10px) translateY(-10px); }
+  100% { transform: translateX(10px) translateY(10px); }
 }
 
 #particleCanvas {
@@ -30,122 +63,297 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: white;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background: var(--card-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 40px 30px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: var(--shadow-heavy);
   text-align: center;
-  width: 80%;
-  max-width: 400px;
+  width: 85%;
+  max-width: 450px;
   opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 1s ease-out forwards;
+  transform: translateY(50px) scale(0.9);
+  animation: fadeInUp 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+  border-radius: 20px 20px 0 0;
 }
 
 /* 進場動畫 */
 @keyframes fadeInUp {
-  from {
+  0% {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(50px) scale(0.9);
+    filter: blur(10px);
   }
-  to {
+  50% {
+    filter: blur(5px);
+  }
+  100% {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
+    filter: blur(0);
   }
 }
 
 /* 個人圖片 */
 .profile-img {
-  width: 120px;
-  height: 120px;
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
   object-fit: cover;
-  margin-bottom: 15px;
-  border: 3px solid #4a90e2;
-  transition: transform 0.3s ease-in-out;
+  margin-bottom: 20px;
+  border: 4px solid transparent;
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+  background-clip: padding-box;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+  position: relative;
+  box-shadow: var(--shadow-medium);
+}
+
+.profile-img::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+  border-radius: 50%;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .profile-img:hover {
-  transform: scale(1.1);
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: var(--shadow-heavy);
+}
+
+.profile-img:hover::before {
+  opacity: 1;
 }
 
 /* 文字區塊 */
 h1 {
-  color: #333;
-  font-size: 24px;
-  margin-bottom: 10px;
+  color: var(--text-primary);
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+h1::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+  border-radius: 2px;
+  animation: slideIn 1s ease-out 0.5s both;
+}
+
+@keyframes slideIn {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 60px;
+    opacity: 1;
+  }
 }
 
 .subtitle {
-  font-size: 18px;
-  color: #666;
-  border-bottom: 2px solid #4a90e2;
-  padding-bottom: 5px;
-  margin-bottom: 10px;
+  font-size: 20px;
+  color: var(--text-secondary);
+  margin-bottom: 25px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
 }
 
 /* 句子淡入動畫 */
 .quotes {
   list-style-type: none;
   padding: 0;
+  margin: 20px 0;
 }
 
 .quotes li {
   font-size: 16px;
-  color: #444;
-  margin: 8px 0;
+  color: var(--text-primary);
+  margin: 12px 0;
   opacity: 0;
-  animation: fadeInText 1s ease-in-out forwards;
+  line-height: 1.6;
+  padding: 15px 20px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 12px;
+  border-left: 4px solid var(--primary-color);
+  animation: fadeInText 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  position: relative;
+  backdrop-filter: blur(10px);
+}
+
+.quotes li::before {
+  content: '"';
+  position: absolute;
+  top: -5px;
+  left: 10px;
+  font-size: 30px;
+  color: var(--primary-color);
+  opacity: 0.3;
+}
+
+.quotes li::after {
+  content: '"';
+  position: absolute;
+  bottom: -15px;
+  right: 10px;
+  font-size: 30px;
+  color: var(--primary-color);
+  opacity: 0.3;
 }
 
 @keyframes fadeInText {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(20px) scale(0.95);
+    filter: blur(5px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
+    filter: blur(0);
   }
 }
 
 /* 讓每行文字依序淡入 */
 .quotes li:nth-child(1) {
-  animation-delay: 0.5s;
+  animation-delay: 0.8s;
 }
 .quotes li:nth-child(2) {
-  animation-delay: 1s;
+  animation-delay: 1.2s;
 }
 .quotes li:nth-child(3) {
-  animation-delay: 1.5s;
+  animation-delay: 1.6s;
 }
 .quotes li:nth-child(4) {
   animation-delay: 2s;
 }
 
 /* 響應式 */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .card {
     width: 90%;
+    padding: 30px 20px;
+  }
+  
+  h1 {
+    font-size: 28px;
+  }
+  
+  .profile-img {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .quotes li {
+    font-size: 15px;
+    padding: 12px 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    width: 95%;
+    padding: 25px 15px;
+  }
+  
+  h1 {
+    font-size: 24px;
+  }
+  
+  .subtitle {
+    font-size: 18px;
   }
 }
 
 /* 讓個人經歷占滿整個畫面 */
 .fullscreen {
-  position: fixed; /* 固定在畫面上 */
+  position: fixed;
   top: 0;
   left: 0;
-  width: 100vw; /* 覆蓋整個螢幕寬度 */
-  height: 100vh; /* 覆蓋整個螢幕高度 */
-  background: rgba(255, 255, 255, 0.95); /* 微透明背景，讓背景粒子可見 */
+  width: 100vw;
+  height: 100vh;
+  background: var(--card-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: left;
-  opacity: 0; /* 預設透明 */
+  opacity: 0;
   transform: scale(0.9);
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.fullscreen h1 {
+  font-size: 36px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.fullscreen .subtitle {
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 40px;
+}
+
+.experience-list {
+  max-width: 800px;
+  width: 90%;
+}
+
+.experience-list li {
+  font-size: 18px;
+  color: var(--text-primary);
+  margin: 20px 0;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 12px;
+  border-left: 4px solid var(--secondary-color);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-light);
+}
+
+.experience-list li:hover {
+  transform: translateX(10px);
+  box-shadow: var(--shadow-medium);
+  background: rgba(255, 255, 255, 0.8);
 }
 
 /* 當顯示時，讓它淡入並放大 */
